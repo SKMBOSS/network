@@ -7,32 +7,36 @@ import java.util.Scanner;
 public class NSLookup {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
 	
-		Scanner sc =new Scanner(System.in);
-		
-		while(true) {
-			System.out.print(">");
-			String hostName = sc.nextLine();
+		Scanner sc = null;
+		try {
+			sc = new Scanner(System.in);
 			
-			if(hostName.equals("exit")) break;
-			
-			try {
-				InetAddress[] inetAddresses = InetAddress.getAllByName(hostName);
+			while(true) {
+				System.out.print(">");
+				String hostName = sc.nextLine();
 				
-				for(int i=0; i<inetAddresses.length; i++) {
-					System.out.println(inetAddresses[i]);
+				if(hostName.equals("exit")) break;
+				
+				try {
+					InetAddress[] inetAddresses = InetAddress.getAllByName(hostName);
 					
-				}
-				
-			} catch (UnknownHostException e) {
-				// TODO Auto-generated catch block
-				//e.printStackTrace();
-				System.out.println("잘못된 형식입니다.");
-			}	
+					for(int i=0; i<inetAddresses.length; i++) {
+						System.out.println(inetAddresses[i]);
+						
+					}
+					
+				} catch (UnknownHostException e) {
+					//e.printStackTrace();
+					System.out.println("잘못된 형식입니다.");
+				}	
+			}
+		} catch (Exception e) {
+			
+		} finally {
+			if (sc != null) {
+				sc.close();
+			}
 		}
-		sc.close();
 	}
-
 }
